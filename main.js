@@ -10,15 +10,19 @@ function createWindow () {
 
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
-    webPreferences: { nodeIntegration: true } //web configuration options for web contents
-  })
+    webPreferences: { nodeIntegration: true }, //web configuration options for web contents
+    // show: false //Hide the window
+    backgroundColor: 'blue' 
+  })  
 
   // Load index.html into the new BrowserWindow
+  //method loadFile is for local files 
   mainWindow.loadFile('index.html') //Correct way to load the index file, the current documentation has outdated setup
+  // mainWindow.loadURL('https://google.com');
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools() //Should be used only for development
-
+  //  mainWindow.webContents.openDevTools() //Should be used only for development
+// mainWindow.once('ready-to-show', mainWindow.show)  //"once" discards this listener to save on some memory 
   // Listen for window being closed
   mainWindow.on('closed',  () => { //event listener 
     mainWindow = null //when closed set the mainWindow to Null.
