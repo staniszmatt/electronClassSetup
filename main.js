@@ -3,7 +3,7 @@ const {app, BrowserWindow} = require('electron')
 const colors = require('colors'); //Setup like react when adding processes or functions to others only this is backend api's. 
 const bcrypt = require('bcrypt');
 
-bcrypt.hash("myPlaintextPassword", 10, function(err, hash) {
+bcrypt.hash('myPlaintextPassword', 10, function(err, hash) {
   // Store hash in your password DB.
   console.log(hash);
   console.log("Errors ", err);
