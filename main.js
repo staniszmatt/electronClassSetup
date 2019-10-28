@@ -28,11 +28,26 @@ function createWindow () {
   mainWindow.on('closed',  () => {
     mainWindow = null
   })
-}
+};
 
-app.on('before-quit', () => {
-  console.log('App is quitting.');
-})
+// app.on('browser-window-blur', e => {
+//   console.log('App Unfocused.');
+// });
+
+// app.on('browser-window-focus', e => {
+//   console.log('App focus.');
+// });
+
+// app.on('browser-window-blur', e => {
+//   setTimeout(() => { //Can be rewritten as setTimeout(apt.quit, 3000)
+//     app.quit();
+//   }, 3000);
+// });
+
+// app.on('before-quit', e => {
+//   console.log('Prevent App from quitting.');
+//   e.preventDefault()
+// })
 
 // Electron `app` is ready
 app.on('ready', () => {
