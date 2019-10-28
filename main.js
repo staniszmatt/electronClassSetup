@@ -1,5 +1,10 @@
 // Modules
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
+
+console.log('App is ready :' + app.isReady()); 
+setTimeout(() => {
+  console.log('App is ready :' + app.isReady());
+}, 2000);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -25,8 +30,15 @@ function createWindow () {
   })
 }
 
+app.on('before-quit', () => {
+  console.log('App is quitting.');
+})
+
 // Electron `app` is ready
-app.on('ready', createWindow)
+app.on('ready', () => {
+  console.log('App is ready!');
+  createWindow()
+})
 
 // Quit when all windows are closed - (Not macOS - Darwin)
 app.on('window-all-closed', () => {
