@@ -49,6 +49,11 @@ function createWindow () {
 //   e.preventDefault()
 // })
 
+console.log(app.getPath('desktop'));
+console.log(app.getPath('music'));
+console.log(app.getPath('temp'));
+console.log(app.getPath('userData')); 
+
 // Electron `app` is ready
 app.on('ready', () => {
   console.log('App is ready!');
