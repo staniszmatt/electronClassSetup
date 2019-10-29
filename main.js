@@ -30,11 +30,19 @@ function createWindow () {
 
   //Event setup for windows
   mainWindow.on('focus', ()=>{
-    console.log('Main Window Focused.')
+    console.log('Main Window Focused.');
   })
   secondWindow.on('focus', ()=>{
-    console.log('Second Window Focused.')
+    console.log('Second Window Focused.');
   })
+  //Same as the individual focus but for any window
+  app.on('browser-window-focus', ()=>{
+    console.log('App window focused.');
+  })
+
+  console.log(BrowserWindow.getAllWindows())
+  //Display the window id 
+  console.log("Main Window Id is :", mainWindow.id)
 
   // Open DevTools - Remove for PRODUCTION!
   // mainWindow.webContents.openDevTools()
@@ -46,7 +54,6 @@ function createWindow () {
     mainWindow = null
   })
 }
-
 
 // Electron `app` is ready
 app.on('ready', createWindow)
