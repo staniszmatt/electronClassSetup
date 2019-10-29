@@ -10,6 +10,8 @@ function createWindow () {
 
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
+    frame: false,
+    titleBarStyle: "hidden",
     webPreferences: { nodeIntegration: true }
   })
 
@@ -17,7 +19,7 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
