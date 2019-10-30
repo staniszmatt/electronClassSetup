@@ -65,12 +65,25 @@ function createWindow () {
   //   console.log(`URL: ${url}, Status Code: ${statusCode}, Message: ${message}`);
   // })
 
-  //Listener for media content
-  wc.on('media-started-playing', ()=>{
-    console.log("Video Started!");
-  })
-  wc.on('media-paused', ()=>{
-    console.log("Video Paused!");
+  // //Listener for media content
+  // wc.on('media-started-playing', ()=>{
+  //   console.log("Video Started!");
+  // })
+  // wc.on('media-paused', ()=>{
+  //   console.log("Video Paused!");
+  // })
+
+  //Context Menu Event used for when user right clicks
+  wc.on('context-menu', (e, params)=>{
+    console.log(`Context Menu: Right Clicked ${params.mediaType} at ${params.x}, ${params.y}`);
+    //Since selecting and loading media doesn't have to be web, the methods are essentially the same
+    console.log(`Selected Text: ${params.selectionText}`) //Good to use to see if the copy menu pops up 
+    console.log(`Selection can be copied: ${params.editFlags.canCopy}`)
+    // console.log("Full Event List: ", e);
+
+    //Setup to use the text selected
+    let selectedText = params.selectionText
+    wc.executeJavaScript(`alert("${selectedText}")`) //execute javascript alert to the front end with selected text d
   })
 
   //Listen for window being closed
@@ -78,6 +91,9 @@ function createWindow () {
     mainWindow = null
   })
 }
+
+
+
 
 
 
