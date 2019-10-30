@@ -17,8 +17,9 @@ function createWindow () {
   })
 
   // Load index.html into the new BrowserWindow
-  // mainWindow.loadFile('index.html')
-  mainWindow.loadURL('https://httpbin.org/basic-auth/user/passwd')
+  mainWindow.loadFile('index.html');
+  // mainWindow.loadURL('https://httpbin.org/basic-auth/user/passwd')
+
 
   // Open DevTools - Remove for PRODUCTION!
   // mainWindow.webContents.openDevTools()
@@ -52,16 +53,24 @@ function createWindow () {
   //   console.log(`Input Key is ${input.key} and input type is ${input.type}`);
   // })
 
-  //Simple setup to send user login for testing 
-  wc.on('login', (e, request, authInfo, callBack)=>{
-    console.log("Logging In: ");
-    callBack('user', 'passwd')
-  })
+  // //Simple setup to send user login for testing 
+  // wc.on('login', (e, request, authInfo, callBack)=>{
+  //   console.log("Logging In: ");
+  //   callBack('user', 'passwd')
+  // })
 
-  //Basic auth test 
-  wc.on('did-navigate', (e, url, statusCode, message) => {
-    console.log("Event info: ", e);
-    console.log(`URL: ${url}, Status Code: ${statusCode}, Message: ${message}`);
+  // // Basic auth test 
+  // wc.on('did-navigate', (e, url, statusCode, message) => {
+  //   console.log("Event info: ", e);
+  //   console.log(`URL: ${url}, Status Code: ${statusCode}, Message: ${message}`);
+  // })
+
+  //Listener for media content
+  wc.on('media-started-playing', ()=>{
+    console.log("Video Started!");
+  })
+  wc.on('media-paused', ()=>{
+    console.log("Video Paused!");
   })
 
   //Listen for window being closed
