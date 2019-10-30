@@ -1,5 +1,6 @@
 // Modules
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow} = require('electron');
+const windowStateKeeper = require('electron-window-state'); //Bring in window state 
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -8,8 +9,17 @@ let mainWindow
 // Create a new BrowserWindow when `app` is ready
 function createWindow () {
 
+  //create a window state manager
+  let winState = windowStateKeeper({
+    defaultHeight: 1000,
+    defaultWidth: 1000
+  })
+
   mainWindow = new BrowserWindow({
-    width: 1000, height: 800,
+    height: winState.height, //Using winstates default hieght and width
+    width: winState.width,
+    x: winState.x,  //Position of window, doesn't need defuat setup in winState as it will defautl to winodw browser center
+    y: winState.y,
     webPreferences: { nodeIntegration: true }
   })
 
