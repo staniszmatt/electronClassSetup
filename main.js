@@ -24,7 +24,10 @@ function createWindow () {
   })
 
   // Load index.html into the new BrowserWindow
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html');
+  
+  //Calling out which window to store state
+  winState.manage(mainWindow)
 
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools()
