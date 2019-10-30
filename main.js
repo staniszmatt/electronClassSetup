@@ -28,6 +28,11 @@ function createWindow () {
   mainWindow.loadFile('index.html');
   secondWindow.loadFile('index.html');
 
+  //Windows visible 
+secondWindow.on('closed', ()=>{
+  mainWindow.maximize();
+})
+
   //Event setup for windows
   mainWindow.on('focus', ()=>{
     console.log('Main Window Focused.');
