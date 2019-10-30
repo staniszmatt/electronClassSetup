@@ -1,3 +1,5 @@
+//Web Content property is in itself a separate module. 
+//Web Content represents the content that is loaded in the window
 // Modules
 const {app, BrowserWindow} = require('electron')
 
@@ -10,6 +12,7 @@ function createWindow () {
 
   mainWindow = new BrowserWindow({
     width: 1000, height: 800,
+    x: 100, y: 100, //Just moving window to upper left corner of screen
     webPreferences: { nodeIntegration: true }
   })
 
@@ -17,7 +20,12 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools()
+  // mainWindow.webContents.openDevTools()
+
+  //create a reference to the web content property
+  let wc = mainWindow.webContents // Basicity short handing the method call
+
+  console.log(wc);
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
