@@ -17,7 +17,8 @@ function createWindow () {
   })
 
   // Load index.html into the new BrowserWindow
-  mainWindow.loadFile('index.html')
+  // mainWindow.loadFile('index.html')
+  mainWindow.loadURL('https://httpbin.org/basic-auth/user/passwd')
 
   // Open DevTools - Remove for PRODUCTION!
   // mainWindow.webContents.openDevTools()
@@ -44,17 +45,33 @@ function createWindow () {
   //   console.log(`Creating new window for : ${url}`);
   // })
 
-  wc.on('before-input-event', (e, input)=>{
-    console.log(`event: ${e}`);
-    console.log(`input: ${input}`);
-    console.log(`Input Key is ${input.key} and input type is ${input.type}`);
+  //Away to see the users input, key up/down logs
+  // wc.on('before-input-event', (e, input) => {
+  //   console.log(`event: ${e}`);
+  //   console.log(`input: ${input}`);
+  //   console.log(`Input Key is ${input.key} and input type is ${input.type}`);
+  // })
+
+  //Simple setup to send user login for testing 
+  wc.on('login', (e, request, authInfo, callBack)=>{
+    console.log("Logging In: ");
+    callBack('user', 'passwd')
   })
 
-  // Listen for window being closed
-  mainWindow.on('closed',  () => {
+  //Basic auth test 
+  wc.on('did-navigate', (e, url, statusCode, message) => {
+    console.log("Event info: ", e);
+    console.log(`URL: ${url}, Status Code: ${statusCode}, Message: ${message}`);
+  })
+
+  //Listen for window being closed
+  mainWindow.on('closed', () => {
     mainWindow = null
   })
 }
+
+
+
 
 // Electron `app` is ready
 app.on('ready', createWindow)
