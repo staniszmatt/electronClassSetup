@@ -40,8 +40,14 @@ function createWindow () {
   //This allows more control over new windows that can be opened.
   //Adding preventDefault will stop the window from opening, read the url and then open a new window based off the url, more control
   //Error handing and messaging can be used here as well 
-  wc.on('new-window', (e, url)=>{
-    console.log(`Creating new window for : ${url}`);
+  // wc.on('new-window', (e, url)=>{
+  //   console.log(`Creating new window for : ${url}`);
+  // })
+
+  wc.on('before-input-event', (e, input)=>{
+    console.log(`event: ${e}`);
+    console.log(`input: ${input}`);
+    console.log(`Input Key is ${input.key} and input type is ${input.type}`);
   })
 
   // Listen for window being closed
