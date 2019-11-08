@@ -14,7 +14,8 @@ function createWindow () {
   //Turning the getter into a function 
   let getCookies = ()=>{
     // The {} means all cookies
-    ses.cookies.get({}, (err, cookies)=>{
+    //Adding cookie1 will only pull that cookie
+    ses.cookies.get({name:  'cookie1'}, (err, cookies)=>{
       console.log("Error: ", err);
       console.log("Cookies!: ", cookies);
     })
@@ -28,17 +29,39 @@ function createWindow () {
   })
 
   // Load index.html into the new BrowserWindow
-  // mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html')
   
   //Setting up a outside source, Need to wait for content 'did-finish-load'
-  mainWindow.loadURL('https://github.com')
+  // mainWindow.loadURL('https://github.com')
 
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools()
 
-  mainWindow.webContents.on('did-finish-load', e => {
-    getCookies();
+  //creating own cookie
+  //with session set to true and no expiration date, the cookie is only good for this current session instance
+  //and isn't stored in the sessions object on the disk.
+  // let cookie = {
+  //   url: 'https://myappdomain.com',
+  //   name: 'cookie1',
+  //   value: 'electron',
+  //   expirationDate: 1636247367
+  // }
+ 
+  //setting the creating cookie in the default session
+  // ses.cookies.set(cookie, err => {
+  //   console.log('Cookie set ');
+  //   console.log('error ', err);
+  //   getCookies();
+  // })
+
+  ses.cookies.remove('https://myappdomain.com', 'cookie1', err =>{
+    console.log('error ', err);
+    getCookies()
   })
+
+  // mainWindow.webContents.on('did-finish-load', e => {
+  //   getCookies();
+  // })
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
