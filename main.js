@@ -28,14 +28,31 @@ function createWindow () {
 
     //Using mainWindow will open dialog window inside it as a child window and is optional 
     //Without calling mainWindow, then the child window can move outside mainWindow 
-    dialog.showOpenDialog({
-      buttonLabel: 'Select a photo',
-      defaultPath: app.getPath('home'), //Can use desktop instead if desired  
-      //createDirectory is a mac property, openFile sets default of selecting only one file, openDirectory to allow us to open a directory
-      properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
-    }, filePaths=>{
-      console.log(filePaths);  
-    });
+    // adialog.showOpenDialog({
+    //   buttonLabel: 'Select a photo',
+    //   defaultPath: app.getPath('home'), //Can use desktop instead if desired  
+    //   //createDirectory is a mac property, openFile sets default of selecting only one file, openDirectory to allow us to open a directory
+    //   properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
+    // }, filePaths=>{
+    //   console.log(filePaths);  
+    // });
+
+    //save dialog, empty object is an options object, this only shows how create the path, separate method for writing data
+    // dialog.showSaveDialog({}, fileName=>{
+    //   console.log(fileName);
+    // })
+
+    //message box dialog, example prompting for a choice
+    const answers = ['Yes', 'No', 'Maybe'];
+    //
+    dialog.showMessageBox({
+      title: 'Message Box',
+      message: 'Please select an option',
+      detail: 'Message details.', 
+      buttons: answers //this provides a range of button options other than whats listed, needs to be created in array of options
+    }, response=>{//callback with response
+      console.log(`User Selected: ${answers[response]}`)
+    }) 
   })
 
   // Listen for window being closed
