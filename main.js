@@ -43,7 +43,7 @@ function createWindow () {
     // })
 
     //message box dialog, example prompting for a choice
-    const answers = ['Yes', 'No', 'Maybe'];
+    const answers = ['Yes', 'No', 'Maybe']; //Order Does Matter, 1st as main, 2nd as secondary, then the rest as additional options. 
     //
     dialog.showMessageBox({
       title: 'Message Box',
