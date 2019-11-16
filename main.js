@@ -1,5 +1,6 @@
 // Modules
-const {app, BrowserWindow} = require('electron')
+//Adding dialog from electron
+const {app, BrowserWindow, dialog} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -17,7 +18,25 @@ function createWindow () {
   mainWindow.loadFile('index.html')
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
+  //when the dom in main session window is finished loading
+  mainWindow.webContents.on('did-finish-load', ()=>{
+
+    //creat an open dialog to load 1 or multiple files at one time
+    //All methods for dialog is blocking, meaning if content tries to load after main window loads and before 
+    //loadfile, the window will hang until user closes the dialog. 
+
+    //Using mainWindow will open dialog window inside it as a child window and is optional 
+    //Without calling mainWindow, then the child window can move outside mainWindow 
+    dialog.showOpenDialog({
+      buttonLabel: 'Select a photo',
+      defaultPath: app.getPath('home'), //Can use desktop instead if desired  
+      //createDirectory is a mac property, openFile sets default of selecting only one file, openDirectory to allow us to open a directory
+      properties: ['multiSelections', 'createDirectory', 'openFile', 'openDirectory']
+    }, filePaths=>{
+      console.log(filePaths);  
+    });
+  })
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
