@@ -7,6 +7,13 @@
   </head>
   <body>
     <!-- Download attribute is to download the image rather than going to the website  -->
-    <h2><a href="https://picsum.photos/500/500/" download>Download Image</a></h2>
+    <h2><a href="https://picsum.photos/5000/5000/" download>Download Image</a></h2>
+    <progress value="0" max="100" id="progress"></progress>
+
+    <!-- Add access to element progress -->
+    <script>
+      window.progress = document.getElementById('progress');
+    </script>
+
   </body>
 </html>
