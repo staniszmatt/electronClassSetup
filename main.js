@@ -1,5 +1,6 @@
 // Modules
-const {app, BrowserWindow} = require('electron')
+//Adding global shortcut from electron
+const {app, BrowserWindow, globalShortcut} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,6 +16,13 @@ function createWindow () {
 
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile('index.html')
+
+  //When app ready, call global short cuts
+  globalShortcut.register('CommandorControl+G', ()=>{
+    console.log('G was pressed');  
+    //remove shortcut, making it a one time use
+    globalShortcut.unregister('CommandorControl+G');
+  });
 
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools()
