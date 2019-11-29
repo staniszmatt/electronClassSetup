@@ -1,9 +1,20 @@
 // Modules
-const {app, BrowserWindow} = require('electron')
+//Need to add menu and menuItems from electron, Both are classes so will start with capital letters 
+const {app, BrowserWindow, Menu, MenuItem} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+
+//Creating a menu 
+let mainMenu = new Menu()
+//Menu Items, takes an object of options that you choose from
+let menuItem1 = new MenuItem({
+  label: 'Electron' 
+})
+
+//Need to add the menuItem to the menu with append
+mainMenu.append(menuItem1)
 
 // Create a new BrowserWindow when `app` is ready
 function createWindow () {
@@ -14,10 +25,14 @@ function createWindow () {
   })
 
   // Load index.html into the new BrowserWindow
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('index.html');
 
   // Open DevTools - Remove for PRODUCTION!
-  mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools();
+
+  //Using mainMenu as our main menu, needs loaded when app is fully ready here
+  Menu.setApplicationMenu(mainMenu)
+
 
   // Listen for window being closed
   mainWindow.on('closed',  () => {
