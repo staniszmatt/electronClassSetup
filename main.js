@@ -10,7 +10,18 @@ let mainWindow
 let mainMenu = new Menu()
 //Menu Items, takes an object of options that you choose from
 let menuItem1 = new MenuItem({
-  label: 'Electron' 
+  label: 'Electron',
+  submenu: [
+    {
+      label: 'Item 1', submmenu: [{label: 'Sub Menu 1'}]
+    },
+    {
+      label: 'Item 2'
+    },
+    {
+      label: 'Item 3'
+    }
+]
 })
 
 //Need to add the menuItem to the menu with append
