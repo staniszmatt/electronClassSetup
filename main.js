@@ -16,7 +16,7 @@ function createWindow () {
   })
 
   mainWindow = new BrowserWindow({
-    height: winState.height, //Using winstates default hieght and width
+    height: winState.height, //Using winstates default height and width
     width: winState.width,
     x: winState.x,  //Position of window, doesn't need defuat setup in winState as it will defautl to winodw browser center
     y: winState.y,
